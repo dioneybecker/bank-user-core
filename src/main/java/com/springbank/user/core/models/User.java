@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -15,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(collation = "users")
+@Document(collection = "user")
 public class User {
     @Id
     private String id;
@@ -26,9 +27,12 @@ public class User {
     @NotEmpty(message = "lastName is mandatory")
     private String lastName;
 
+    @Valid
     @Email(message = "please provide a valid email address")
     private String emailAddress;
 
+
     @NotNull(message = "please provide a valid account credentials")
+    @Valid
     private Account account;
 }
